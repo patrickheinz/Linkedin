@@ -5,16 +5,16 @@ Este repositório contém uma infraestrutura completa para simulação e anális
 ## 📂 Estrutura de Arquivos
 
 ### 1. `utils/db_utils.py`
-**Finalidade:** Ficheiro de utilitários partilhados para operações de ETL e gestão de base de dados.
-- Gere a ligação a múltiplas bases de dados (PostgreSQL, SQL Server) usando `psycopg2`, `pyodbc` e `SQLAlchemy`.
+**Finalidade:** Arquivo de funções comuns para operações de ETL e gestão de banco de dados.
+- Gerencia a conexão com múltiplos bancos de dados (PostgreSQL, SQL Server) usando `psycopg2`, `pyodbc` e `SQLAlchemy`.
 - Faz o carregamento e validação de variáveis de ambiente (`.env`).
 
 
 ### 2. `sql/create_tables.sql`
-**Finalidade:** Script DDL (Data Definition Language) para estruturar a base de dados PostgreSQL.
+**Finalidade:** Script DDL (Data Definition Language) para estruturar o banco de dados PostgreSQL.
 - Cria as tabelas `clients` (clientes), `contracts` (contratos) e `invoices` (faturas).
 - Estabelece a integridade referencial com chaves estrangeiras (Foreign Keys) e restrições (Check Constraints).
-- Prepara a base com tipos de dados adequados para garantir a precisão dos cálculos financeiros.
+- Prepara o banco com tipos de dados adequados para garantir a precisão dos cálculos financeiros.
 
 ### 3. `gerar_dados.py`
 **Finalidade:** Motor de geração de dados sintéticos realistas.
@@ -31,7 +31,7 @@ Este repositório contém uma infraestrutura completa para simulação e anális
 
 ## 🚀 Como Utilizar
 
-1. **Preparar a Base de Dados:** Execute o arquivo `create_tables.sql` no seu ambiente PostgreSQL para criar a estrutura das tabelas.
+1. **Preparar o Banco de Dados:** Execute o arquivo `create_tables.sql` no seu ambiente PostgreSQL para criar a estrutura das tabelas.
 2. **Instalação das dependências:** Costumo usar o pipenv para gerenciar pacotes: `pip install pipenv`. Basta navegar até o caminho onde está o Pipfile e digitar `pipenv install`. Ele criará o venv e instalará os pacotes necessários para esse lab.
 3. **Gerar os Dados:** Para essa lab, as senhas estão salvas em um arquivo fora do projeto (`~/secure/env/.env`) e o `db_utils.py` está configurado para, dinamicamente, fazer o import das bibliotecas e retornar as senhas para uso posterior no código. Na prática, basta executar o `gerar_dados.py` para popular as tabelas.
-4. **Analisar:** Utilize as queries do ficheiro `queries.sql` para extrair os indicadores financeiros da base populada.
+4. **Analisar:** Utilize as queries do arquivo `queries.sql` para extrair os indicadores financeiros do banco populado.
