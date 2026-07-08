@@ -32,5 +32,6 @@ Este repositório contém uma infraestrutura completa para simulação e anális
 ## 🚀 Como Utilizar
 
 1. **Preparar a Base de Dados:** Execute o arquivo `create_tables.sql` no seu ambiente PostgreSQL para criar a estrutura das tabelas.
-2. **Gerar os Dados:** Para essa lab, as senhas estão salvas em um arquivo fora do projeto (`~/secure/env/.env`) e o `db_utils.py` está configurado para, dinamicamente, fazer o import das bibliotecas e retornar as senhas para uso posterior no código. Na prática, basta executar o `gerar_dados.py` para popular as tabelas.
-3. **Analisar:** Utilize as queries do ficheiro `queries.sql` para extrair os indicadores financeiros da base populada.
+2. **Instalação das dependências:** Costumo usar o pipenv para gerenciar pacotes: `pip install pipenv`. Basta navegar até o caminho onde está o Pipfile e digitar `pipenv install`. Ele criará o venv e instalará os pacotes necessários para esse lab.
+3. **Gerar os Dados:** Para essa lab, as senhas estão salvas em um arquivo fora do projeto (`~/secure/env/.env`) e o `db_utils.py` está configurado para, dinamicamente, fazer o import das bibliotecas e retornar as senhas para uso posterior no código. Na prática, basta executar o `gerar_dados.py` para popular as tabelas.
+4. **Analisar:** Utilize as queries do ficheiro `queries.sql` para extrair os indicadores financeiros da base populada.
