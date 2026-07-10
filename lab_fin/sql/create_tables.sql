@@ -7,6 +7,7 @@
 DROP TABLE IF EXISTS invoices CASCADE;
 DROP TABLE IF EXISTS contracts CASCADE;
 DROP TABLE IF EXISTS clients CASCADE;
+DROP TABLE IF EXISTS debt_collection CASCADE;
 
 -- 1. TABELA DE CLIENTES
 -- Armazena os perfis demográficos e segmentações do Faker
@@ -50,11 +51,18 @@ CREATE TABLE invoices (
     CONSTRAINT chk_invoice_status CHECK (status IN ('Paid', 'Overdue', 'Open'))
 );
 
-/*
-COMMENT ON TABLE clients IS 'Tabela contendo os dados demográficos e segmentação de clientes.';
-COMMENT ON TABLE contracts IS 'Tabela contendo os cabeçalhos de contratos financeiros criados.';
-COMMENT ON TABLE invoices IS 'Tabela granular contendo o fluxo de parcelas e status de pagamento para controle de risco (FPD/SPD).';
+CREATE TABLE debt_collection (
+    id_debt_collection INT PRIMARY KEY,
+    id_contrato INT NOT NULL,
+    num_fatura INT NOT NULL,
+    data_acionamento DATE NOT NULL,
+    forma_acionamento VARCHAR(50) NOT NULL,  -- 'ligação', 'sms', etc
+    cpc INT NOT NULL, -- contato com pessoa certa
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
+    -- Restrições de Integridade
+    CONSTRAINT fk_debt_collection_contract FOREIGN KEY (id_contrato) REFERENCES contracts(id_contrato) ON DELETE CASCADE
+);
 -- Índice para acelerar agrupamentos por mercado/segmento 
 CREATE INDEX idx_clients_segmento ON clients(segmento);
 
@@ -64,4 +72,3 @@ CREATE INDEX idx_contracts_id_cliente ON contracts(id_cliente);
 -- Índices compostos de alta performance para buscas temporais de risco e Window Functions
 CREATE INDEX idx_invoices_contract_due ON invoices(id_contrato, due_date);
 CREATE INDEX idx_invoices_status ON invoices(status);
-*/
